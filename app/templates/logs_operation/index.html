@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    日志
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $('#infos').scrollTop($('#infos')[0].scrollHeight)
+        })
+    </script>
+    <script>
+        $(function () {
+            $.get('{% url 'lo_op:machine_group' %}', function (data) {
+                res = data.data;
+                group = $('#group');
+                $.each(res, function (index, item) {
+                    id = item[0];
+                    groupname = item[1];
+                    option_str = '<option value="' + id + '">' + groupname + '</option>';
+                    group.append(option_str)
+                })
+            });
+            $('#group').change(function () {
+                pid = $(this).val();
+                host = $('#host');
+                container = $('#container');
+                host.empty().append('<option>---请选择主机---</option>');
+                container.empty().append('<option>---请选择容器---</option>');
+                $.get('machine_host/' + pid, function (data) {
+                    res = data.data;
+                    $.each(res, function (index, item) {
+                        id = item[0];
+                        hostname = item[1];
+                        option_str = '<option value="' + id + '">' + hostname + '</option>';
+                        host.append(option_str)
+                    })
+                })
+            });
+            $('#host').change(function () {
+                hostid = $(this).val();
+                container = $('#container');
+                container.empty().append('<option>---请选择容器---</option>');
+                $.get('container_list/' + hostid, function (data) {
+                    res = data.data;
+                    if (res === 0) {
+                        $('#infos').show().html('该主机目前无法连接')
+                    }
+                    $.each(res, function (index, item) {
+                        containername = item;
+                        option_str = '<option value="' + containername + '">' + containername + '</option>';
+                        container.append(option_str)
+                    })
+                })
+            });
+
+        });
+    </script>
+    <script>
+        $(function () {
+            $('#btnSubmit').click(function () {
+                hostid = $('#host').val();
+                containername = $('#container').val();
+                $.ajax({
+                    'url': '{% url 'lo_op:show_logs' %}',
+                    'type': 'post',
+                    'data': {'hostid': hostid, 'container': containername},
+                    'dataType': 'json'
+                }).success(function (data) {
+                    if (data.data === 1) {
+                        $('#infos').show().html('请选择主机')
+                    } else if (data.data === 2) {
+                        $('#infos').show().html('请选择容器')
+                    } else if (data.data === 0) {
+                        $('#infos').show().html('该主机目前无法连接')
+                    } else {
+                        {% comment %}let content = '';
+                        data.data.forEach(function (line) {
+                            content = content + line + '<br>'
+                        });{% endcomment %}
+                        $('#infos').show().html(data.data);
+                        $('#testscorll').get(0).scrollTop = 99999
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}
+{% block style %}
+    <style>
+        #infos {
+            display: none;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        {#        <form action="{% url 'lo_op:show_logs' %}" method="post">#}
+        <div class="select2-container col-md-2 select2-search--dropdown">
+            <select name="group" id="group">
+                <option>---请选择环境---</option>
+            </select>
+        </div>
+        <div class="select2-container col-md-2">
+            <select name="host" id="host">
+                <option>---请选择主机---</option>
+            </select>
+        </div>
+        <div class="select2-container col-md-2">
+            <select name="container" id="container">
+                <option value="">---请选择容器---</option>
+            </select>
+        </div>
+        {#            <div class="select2-container col-md-2">#}
+        {#                <select name="operation" id="operation">#}
+        {#                    <option value="10">---请选择操作---</option>#}
+        {#                </select>#}
+        {#            </div>#}
+        <div class="col-md-2 vLargeTextField">
+            <input type="button" value="提交" id="btnSubmit">
+        </div>
+    </div>
+    <hr>
+    <div class="pre-scrollable"
+         style="max-width: 100%; max-height: 600px; height: 1000px; overflow-y: auto; word-break: break-all"
+         id="testscorll">
+        <div id="infos"></div>
+    </div>
+{% endblock %}

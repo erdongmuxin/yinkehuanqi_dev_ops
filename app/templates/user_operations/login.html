@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    用户登录
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(function () {
+            $('#btnLogin').click(function () {
+                username = $('#username').val();
+                password = $('#password').val();
+                console.log(username);
+                $.ajax({
+                    'url': '{% url 'uo_op:logincheck' %}',
+                    'type': 'post',
+                    'data': {'username': username, 'password': password},
+                    'dataType': 'json'
+                }).success(function (data) {
+                    if (data.res === 0) {
+                        $('#errmsg').show().html('用 户 名 或 密 码 错 误')
+                    } else {
+                        location.href = '{% url 'uo_op:index' %}'
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}
+
+{% block style %}
+    <style>
+        #errmsg {
+            display: none;
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12" style="text-align: center">
+            <h2>&emsp;欢 迎 登 录</h2>
+        </div>
+    </div>
+    <hr>
+    <form class="form-horizontal"></form>
+    <div class="form-group-lg row">
+        <div class="col-md-1"></div>
+        <label for="username" class="col-md-3 well-sm" style="text-align: right; font-size: large">用户名</label>
+        <div class="col-md-5">
+            <input type="text" class="form-control" id="username" placeholder="username">
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="form-group-lg row">
+        <div class="col-md-1"></div>
+        <label for="password" class="col-md-3 inline_label well-sm"
+               style="text-align: right; font-size: large">密&emsp;码</label>
+        <div class="col-md-5">
+            <input type="password" class="form-control" id="password" placeholder="password">
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="form-group-lg row">
+        <div class="col-md-offset-4 col-md-5" id="errmsg">
+        </div>
+    </div>
+    <hr>
+    <div class="form-group-lg row">
+        <div class="col-md-1"></div>
+        <div class="col-md-offset-3 col-md-5">
+            <button type="submit" class="btn btn-primary btn-group-justified" id="btnLogin">登 录</button>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    </form>
+{% endblock %}
