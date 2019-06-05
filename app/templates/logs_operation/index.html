@@ -6,11 +6,6 @@
 
 {% block script %}
     <script>
-        $(document).ready(function () {
-            $('#infos').scrollTop($('#infos')[0].scrollHeight)
-        })
-    </script>
-    <script>
         $(function () {
             $.get('{% url 'lo_op:machine_group' %}', function (data) {
                 res = data.data;
