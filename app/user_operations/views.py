@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 from project_models.models import UserInfo
 
@@ -18,6 +19,7 @@ def login(request):
     return render(request, 'user_operations/login.html')
 
 
+@csrf_exempt
 def login_check(request):
     post_username = request.POST.get('username')
     post_password = request.POST.get('password')

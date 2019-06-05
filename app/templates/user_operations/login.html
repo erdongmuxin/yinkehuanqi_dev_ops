@@ -11,6 +11,9 @@
                 username = $('#username').val();
                 password = $('#password').val();
                 console.log(username);
+                {% comment %}$.ajaxSetup({
+                    data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+                });{% endcomment %}
                 $.ajax({
                     'url': '{% url 'uo_op:logincheck' %}',
                     'type': 'post',
@@ -44,7 +47,7 @@
         </div>
     </div>
     <hr>
-    <form class="form-horizontal"></form>
+    {#    <form class="form-horizontal">#}
     <div class="form-group-lg row">
         <div class="col-md-1"></div>
         <label for="username" class="col-md-3 well-sm" style="text-align: right; font-size: large">用户名</label>
@@ -75,5 +78,5 @@
         <div class="col-md-2"></div>
     </div>
 
-    </form>
+    {#    </form>#}
 {% endblock %}
