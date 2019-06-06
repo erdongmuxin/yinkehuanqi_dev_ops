@@ -38,7 +38,7 @@
                 hostid = $(this).val();
                 container = $('#container');
                 container.empty().append('<option>---请选择容器---</option>');
-                $('#infos').show().html('');
+                $('#infos').show().html('获取容器中,请稍后');
                 $.get('container_list/' + hostid, function (data) {
                     res = data.data;
                     if (res === 0) {
@@ -47,7 +47,9 @@
                     $.each(res, function (index, item) {
                         containername = item;
                         option_str = '<option value="' + containername + '">' + containername + '</option>';
-                        container.append(option_str)
+                        container.append(option_str);
+                        $('#infos').show().html('容器获取成功');
+
                     })
                 })
             });
