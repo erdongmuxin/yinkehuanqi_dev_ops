@@ -7,10 +7,10 @@ from django.views.decorators.csrf import csrf_exempt
 from project_models.models import HostInfo, MachineGroupInfo
 from website import settings
 
+# 消除警告信息
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
-# Create your views here.
 def index(request):
     return render(request, 'logs_operation/index.html')
 
