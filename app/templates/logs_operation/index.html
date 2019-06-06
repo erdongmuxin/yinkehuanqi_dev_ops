@@ -107,6 +107,7 @@
                         data.data.forEach(function (line) {
                             content = content + line + '<br>'
                         });{% endcomment %}
+                        {#$('#infos').show().html($('#infos').html() + data.data);#}
                         $('#infos').show().html(data.data);
                         $('#testscorll').get(0).scrollTop = $('#testscorll').get(0).scrollHeight
                     }
