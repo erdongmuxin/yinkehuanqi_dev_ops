@@ -9,7 +9,4 @@ urlpatterns = [
     re_path('machine_host/(\d*)', views.machine_host, name='machine_host'),
     re_path('container_list/(\d*)', views.containers_list, name='container_list'),
     path('show_logs/', views.show_logs, name='show_logs'),
-
-    path('websocket/', views.websocket_test, name='websocket'),
-    path('echo/', views.echo, name='echo')
 ]
