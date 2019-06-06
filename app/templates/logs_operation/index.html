@@ -51,12 +51,12 @@
                     })
                 })
             });
-
         });
     </script>
     <script>
         $(function () {
             $('#btnSubmit').click(function () {
+                $('#infos').show().html('正在查询,请稍后');
                 hostid = $('#host').val();
                 containername = $('#container').val();
                 $.ajax({
@@ -77,7 +77,7 @@
                             content = content + line + '<br>'
                         });{% endcomment %}
                         $('#infos').show().html(data.data);
-                        $('#testscorll').get(0).scrollTop = 99999
+                        $('#testscorll').get(0).scrollTop = $('#testscorll').get(0).scrollHeight()
                     }
                 })
             })

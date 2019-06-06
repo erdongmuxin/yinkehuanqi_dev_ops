@@ -2,6 +2,7 @@ import docker
 import urllib3
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 from project_models.models import HostInfo, MachineGroupInfo
 from website import settings
@@ -58,7 +59,7 @@ def containers_list(request, hostid):
     except AttributeError:
         return client
 
-
+@csrf_exempt
 def show_logs(request):
     hostid = request.POST.get('hostid')
     container = request.POST.get('container')
