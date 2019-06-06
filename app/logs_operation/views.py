@@ -59,6 +59,7 @@ def containers_list(request, hostid):
     except AttributeError:
         return client
 
+
 @csrf_exempt
 def show_logs(request):
     hostid = request.POST.get('hostid')

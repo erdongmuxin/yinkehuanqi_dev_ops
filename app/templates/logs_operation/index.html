@@ -18,6 +18,7 @@
                 })
             });
             $('#group').change(function () {
+                window.data = new Date();
                 pid = $(this).val();
                 host = $('#host');
                 container = $('#container');
@@ -54,10 +55,10 @@
                 })
             });
         });
-    </script>
-    <script>
+
         $(function () {
             $('#btnSubmit').click(function () {
+                clearTimeout(window.timer);
                 $('#infos').show().html('正在查询,请稍后');
                 hostid = $('#host').val();
                 containername = $('#container').val();
@@ -79,9 +80,40 @@
                             content = content + line + '<br>'
                         });{% endcomment %}
                         $('#infos').show().html(data.data);
-                        $('#testscorll').get(0).scrollTop = $('#testscorll').get(0).scrollHeight()
+                        $('#testscorll').get(0).scrollTop = $('#testscorll').get(0).scrollHeight
                     }
                 })
+            })
+        })
+
+        $(function () {
+            $('#btnRefresh').click(function () {
+                hostid = $('#host').val();
+                containername = $('#container').val();
+                $.ajax({
+                    'url': '{% url 'lo_op:show_logs' %}',
+                    'type': 'post',
+                    'data': {'hostid': hostid, 'container': containername},
+                    'dataType': 'json'
+                }).success(function (data) {
+                    if (data.data === 1) {
+                        $('#infos').show().html('请选择主机')
+                    } else if (data.data === 2) {
+                        $('#infos').show().html('请选择容器')
+                    } else if (data.data === 0) {
+                        $('#infos').show().html('该主机目前无法连接')
+                    } else {
+                        {% comment %}let content = '';
+                        data.data.forEach(function (line) {
+                            content = content + line + '<br>'
+                        });{% endcomment %}
+                        $('#infos').show().html(data.data);
+                        $('#testscorll').get(0).scrollTop = $('#testscorll').get(0).scrollHeight
+                    }
+                });
+                window.timer = setTimeout(function () {
+                    $('#btnRefresh').click()
+                }, 5000)
             })
         })
     </script>
@@ -117,7 +149,10 @@
         {#                </select>#}
         {#            </div>#}
         <div class="col-md-2 vLargeTextField">
-            <input type="button" value="提交" id="btnSubmit">
+            <input type="button" value="最近1000条" id="btnSubmit">
+        </div>
+        <div class="col-md-2 vLargeTextField">
+            <input type="button" value="实时刷新" id="btnRefresh">
         </div>
     </div>
     <hr>
