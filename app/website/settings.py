@@ -84,7 +84,7 @@ DATABASES = {
         'HOST': 'database1.mysql.rds.aliyuncs.com',
         # 'PASSWORD': 'Clota_saas_dev@2019Root',
         # 'HOST': '172.17.12.142',
-        'PORT': '3306',
+        # 'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
