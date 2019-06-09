@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cf336ba1-f7f1-4149-b67d-ee2aa7cb555e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/midware/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/midware/middleware.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/logs_operation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/logs_operation/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/user_operations/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/user_operations/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/website/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/website/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,19 +43,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/website/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-28">
-              <caret line="75" column="63" lean-forward="true" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="63" />
+            <state relative-caret-position="40">
+              <caret line="107" column="81" selection-start-line="107" selection-start-column="81" selection-end-line="107" selection-end-column="81" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/user_operations/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="63">
+              <caret line="3" column="8" lean-forward="true" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+              <folding>
+                <element signature="e#1518#1561#0#HTML" expanded="true" />
+                <element signature="e#1914#1957#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/logs_operation/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
+            <state relative-caret-position="376">
               <caret line="157" column="10" lean-forward="true" selection-start-line="157" selection-start-column="10" selection-end-line="157" selection-end-column="10" />
               <folding>
                 <element signature="e#6632#6655#0#HTML" expanded="true" />
@@ -70,15 +82,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="70">
               <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/logs_operation/apps.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -150,19 +153,19 @@
         <option value="$PROJECT_DIR$/app/project_models/models.py" />
         <option value="$PROJECT_DIR$/app/static/css/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/app/templates/base.html" />
-        <option value="$PROJECT_DIR$/app/templates/user_operations/login.html" />
         <option value="$PROJECT_DIR$/app/user_operations/views.py" />
         <option value="$PROJECT_DIR$/client_study.py" />
         <option value="$PROJECT_DIR$/app/templates/logs_operation/websocket.html" />
         <option value="$PROJECT_DIR$/app/logs_operation/urls.py" />
         <option value="$PROJECT_DIR$/app/logs_operation/views.py" />
         <option value="$PROJECT_DIR$/app/midware/middleware.py" />
-        <option value="$PROJECT_DIR$/app/website/settings.py" />
         <option value="$PROJECT_DIR$/app/templates/logs_operation/index.html" />
+        <option value="$PROJECT_DIR$/app/templates/user_operations/login.html" />
+        <option value="$PROJECT_DIR$/app/website/settings.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
@@ -186,31 +189,6 @@
               <item name="devops" type="b2602c69:ProjectViewProjectNode" />
               <item name="devops" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="devops" type="b2602c69:ProjectViewProjectNode" />
-              <item name="devops" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="logs_operation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="devops" type="b2602c69:ProjectViewProjectNode" />
-              <item name="devops" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="devops" type="b2602c69:ProjectViewProjectNode" />
-              <item name="devops" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="logs_operation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="devops" type="b2602c69:ProjectViewProjectNode" />
-              <item name="devops" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="website" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -288,12 +266,12 @@
       <updated>1559540641611</updated>
       <workItem from="1559540643248" duration="20837000" />
       <workItem from="1559630034039" duration="55622000" />
-      <workItem from="1559751721498" duration="23827000" />
+      <workItem from="1559751721498" duration="26371000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100286000" />
+    <option name="totallyTimeSpent" value="102830000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="953" y="0" width="974" height="1047" extended-state="0" />
@@ -516,16 +494,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/user_operations/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="841">
-          <caret line="59" column="35" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
-          <folding>
-            <element signature="e#1810#1816#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/logs_operation/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -651,20 +619,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/website/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-28">
-          <caret line="75" column="63" lean-forward="true" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/logs_operation/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
+        <state relative-caret-position="376">
           <caret line="157" column="10" lean-forward="true" selection-start-line="157" selection-start-column="10" selection-end-line="157" selection-end-column="10" />
           <folding>
             <element signature="e#6632#6655#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/user_operations/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="8" lean-forward="true" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="8" />
+          <folding>
+            <element signature="e#1518#1561#0#HTML" expanded="true" />
+            <element signature="e#1914#1957#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/website/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="107" column="81" selection-start-line="107" selection-start-column="81" selection-end-line="107" selection-end-column="81" />
         </state>
       </provider>
     </entry>
