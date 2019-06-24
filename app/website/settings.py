@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user_operations.apps.UserOperationsConfig',
     'midware.apps.MidwareConfig',
-    'project_models.apps.ProjectModelsConfig'
+    'project_models.apps.ProjectModelsConfig',
+    'yuanxing.apps.YuanxingConfig',
 ]
 
 MIDDLEWARE = [

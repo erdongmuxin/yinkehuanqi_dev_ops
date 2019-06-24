@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="root@39.108.76.244:22" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="Always" serverName="devops" autoUploadExternalChanges="true">
     <serverData>
       <paths name="ai_study">
         <serverdata>
@@ -19,7 +19,7 @@
       <paths name="devops">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/sd/python/devops" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/sd/python/devops" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from project_models.models import UserInfo, PositionInfo, MachineGroupInfo, HostInfo
+from project_models.models import UserInfo, PositionInfo, MachineGroupInfo, HostInfo, YuanXingInfo
 
 
 class UserInfoAdmin(admin.ModelAdmin):
@@ -16,3 +16,4 @@ admin.site.register(UserInfo, UserInfoAdmin)
 admin.site.register(PositionInfo)
 admin.site.register(MachineGroupInfo)
 admin.site.register(HostInfo, HostInfoAdmin)
+admin.site.register(YuanXingInfo)

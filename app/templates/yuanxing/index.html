@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    主页
+{% endblock %}
+{% block script %}
+
+
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        {% for yx_name in yx_names %}
+            <div class="col-md-2 col-xs-2"></div>
+            <div class="col-md-2 col-xs-2" style="text-align: right">
+
+                    <a href="http://39.108.76.244:801/{{ yx_name }}/">查看{{ yx_name }}</a>
+                </div>
+            <div class="col-md-3 col-xs-3" style="text-align: right">
+                <form action="{% url 'yuanxing:del_yx' %}" method="post">
+                    <input type="hidden" value="{{ yx_name }}" name="del_yx_name">
+                    <input type="submit" value="删除{{ yx_name }}" style="text-align: center">
+                </form>
+            </div>
+            <div class="col-md-3 col-xs-3" style="text-align: center">
+                <form action="">
+                    <input type="hidden" value="{{ yx_name }}" name="yx_info">&emsp;
+                    <input type="submit" value="修改{{ yx_name }}文件">
+                </form>
+            </div>
+            <div class="col-md-2 col-xs-2"></div>
+        {% endfor %}
+        <br>
+        <hr>
+        <div class="col-md-12" style="text-align: center">
+            <form action="{% url 'yuanxing:add_yx' %}" method="post">
+                <input type="text" name='add_yx_name'>
+                <input type="submit" value="增加原型">
+            </form>
+        </div>
+    </div>
+{% endblock %}
