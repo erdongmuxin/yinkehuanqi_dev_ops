@@ -64,14 +64,18 @@ def containers_list(request, hostid):
 def show_logs(request):
     hostid = request.POST.get('hostid')
     container = request.POST.get('container')
+    length = request.POST.get('length')
+    keyword = request.POST.get('keyword')
     if hostid != '---请选择主机---':
         host = HostInfo.objects.get(id=hostid)
         client = connect_to_machine(host.hostname)
         try:
             container = client.containers.get(container)
-            logs = container.logs(tail=1000)
+            logs = container.logs(tail=int(length))
             logs = logs.replace(b'\n', b'<br>')
             logs = logs.replace(b'\tat', b'&emsp;&emsp;')
+            if keyword:
+                logs = logs.replace(b'%s' % keyword.encode(), b'<font color=\"red\">%s</font>' % keyword.encode())
             logs = logs.decode()
             return JsonResponse({'data': logs})
         except AttributeError:

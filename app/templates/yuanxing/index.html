@@ -4,34 +4,53 @@
     主页
 {% endblock %}
 {% block script %}
-
-
-
+    <script>
+        $(function () {
+            $('#up_btn').click(function () {
+                setTimeout(function () {
+                    $('#up').html('正在上传,上传完成之后,页面会刷新,请耐心等待,勿执行其他操作')
+                }, 0)
+            })
+        })
+    </script>
 {% endblock %}
-
-
 {% block content %}
-    <div class="row">
+    <div class="row" id="up" style="text-align: center">
+        <div class="col-md-12 col-xs-12">
+            重新上传原型必须是zip格式,压缩包名字以及解压之后的目录名字必须与原型的名字一致,原型根目录下应该存放的有index.html文件,页面刷新之后即表示上传成功,点击查看可直接访问,删除原型不会立刻删除文件,误删再次添加即可
+            <br>
+            <div class="col-xs-12 col-md-12">&emsp;</div>
+        </div>
+        <br>
+        <br>
+        <hr>
         {% for yx_name in yx_names %}
-            <div class="col-md-2 col-xs-2"></div>
-            <div class="col-md-2 col-xs-2" style="text-align: right">
+            <div class="col-md-3 col-xs-3" style="text-align: right">
 
-                    <a href="http://39.108.76.244:801/{{ yx_name }}/">查看{{ yx_name }}</a>
-                </div>
+                <a href="http://39.105.79.80:801/{{ yx_name }}/">查看{{ yx_name }}</a>
+            </div>
             <div class="col-md-3 col-xs-3" style="text-align: right">
                 <form action="{% url 'yuanxing:del_yx' %}" method="post">
                     <input type="hidden" value="{{ yx_name }}" name="del_yx_name">
                     <input type="submit" value="删除{{ yx_name }}" style="text-align: center">
                 </form>
             </div>
-            <div class="col-md-3 col-xs-3" style="text-align: center">
-                <form action="">
-                    <input type="hidden" value="{{ yx_name }}" name="yx_info">&emsp;
-                    <input type="submit" value="修改{{ yx_name }}文件">
+            <div class="col-md-6 col-xs-6 panel panel-default">
+                <form class="form-horizontal" action="{% url 'yuanxing:edit_yx' %}" method="post"
+                      enctype="multipart/form-data">
+                    <div class="col-md-6 col-xs-6">
+                        <input type="file" name="zip_info">
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                        <input type="hidden" name="yx_info" value="{{ yx_name }}">
+                    </div>
+                    <div class="col-md-5 col-xs-5">
+                        <input type="submit" value="重新上传{{ yx_name }}文件" id="up_btn">
+                    </div>
                 </form>
             </div>
-            <div class="col-md-2 col-xs-2"></div>
         {% endfor %}
+        <br>
         <br>
         <hr>
         <div class="col-md-12" style="text-align: center">
