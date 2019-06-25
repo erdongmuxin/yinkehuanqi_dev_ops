@@ -27,7 +27,7 @@
         {% for yx_name in yx_names %}
             <div class="col-md-3 col-xs-3" style="text-align: right">
 
-                <a href="http://39.105.79.80:801/{{ yx_name }}/">查看{{ yx_name }}</a>
+                <a href="http://39.105.79.80:801/{{ yx_name }}/" target="_blank">查看{{ yx_name }}</a>
             </div>
             <div class="col-md-3 col-xs-3" style="text-align: right">
                 <form action="{% url 'yuanxing:del_yx' %}" method="post">

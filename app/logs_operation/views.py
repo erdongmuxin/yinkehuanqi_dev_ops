@@ -1,3 +1,5 @@
+import re
+
 import docker
 import urllib3
 from django.http import JsonResponse
@@ -71,12 +73,25 @@ def show_logs(request):
         client = connect_to_machine(host.hostname)
         try:
             container = client.containers.get(container)
-            logs = container.logs(tail=int(length))
+            if int(length):
+                logs = container.logs(tail=int(length))
+            else:
+                logs = container.logs(tail=100)
             logs = logs.replace(b'\n', b'<br>')
             logs = logs.replace(b'\tat', b'&emsp;&emsp;')
             if keyword:
-                logs = logs.replace(b'%s' % keyword.encode(), b'<font color=\"red\">%s</font>' % keyword.encode())
+                word = re.findall(b'%s' % keyword.encode(), logs, flags=re.IGNORECASE)
+                Sword = set(word)
+                for i in Sword:
+                    logs = re.sub(b'%s' % i, b'<font color=\"red\">%s</font>' % i, logs)
             logs = logs.decode()
+            logs_list = logs.split('<br>')
+            logs = ''
+            for i in logs_list:
+                if re.search(keyword, i, flags=re.IGNORECASE):
+                    logs += '%s<br>' % i
+            if not logs:
+                logs = '没有查到数据<br>'
             return JsonResponse({'data': logs})
         except AttributeError:
             return client
