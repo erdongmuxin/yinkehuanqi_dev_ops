@@ -55,7 +55,6 @@
                 })
             });
         });
-
         $(function () {
             $('#btnSubmit').click(function () {
                 clearTimeout(window.timer);
@@ -77,17 +76,12 @@
                     } else if (data.data === 0) {
                         $('#infos').show().html('该主机目前无法连接')
                     } else {
-                        {% comment %}let content = '';
-                        data.data.forEach(function (line) {
-                            content = content + line + '<br>'
-                        });{% endcomment %}
                         $('#infos').show().html(data.data);
                         $('#testscorll').get(0).scrollTop = $('#testscorll').get(0).scrollHeight
                     }
                 })
             })
         });
-
         $(function () {
             $('#btnRefresh').click(function () {
                 hostid = $('#host').val();
@@ -95,7 +89,7 @@
                 $.ajax({
                     'url': '{% url 'lo_op:show_logs' %}',
                     'type': 'post',
-                    'data': {'hostid': hostid, 'container': containername},
+                    'data': {'hostid': hostid, 'container': containername,'length': '200', 'keyword': ''},
                     'dataType': 'json'
                 }).success(function (data) {
                     if (data.data === 1) {
@@ -105,11 +99,6 @@
                     } else if (data.data === 0) {
                         $('#infos').show().html('该主机目前无法连接')
                     } else {
-                        {% comment %}let content = '';
-                        data.data.forEach(function (line) {
-                            content = content + line + '<br>'
-                        });{% endcomment %}
-                        {#$('#infos').show().html($('#infos').html() + data.data);#}
                         $('#infos').show().html(data.data);
                         $('#testscorll').get(0).scrollTop = $('#testscorll').get(0).scrollHeight
                     }
@@ -130,7 +119,6 @@
 {% endblock %}
 {% block content %}
     <div class="row" style="text-align: center">
-        {#        <form action="{% url 'lo_op:show_logs' %}" method="post">#}
         <div class="select2-container col-md-4 col-xs-4 select2-search--dropdown">
             <select name="group" id="group">
                 <option>---请选择环境---</option>
@@ -146,23 +134,18 @@
                 <option value="">---请选择容器---</option>
             </select>
         </div>
-        {#            <div class="select2-container col-md-2">#}
-        {#                <select name="operation" id="operation">#}
-        {#                    <option value="10">---请选择操作---</option>#}
-        {#                </select>#}
-        {#            </div>#}
     </div>
     <br>
     <hr>
     <div class="row" style="text-align: center">
         <div class="col-md-9 col-xs-9 panel panel-default">
-            <div class="col-md-4 col-xs-4">
-                <input type="text" id="length" placeholder="查询条数">
+            <div class="col-md-5 col-xs-5">
+                <input type="text" id="length" placeholder="查询条数 默认1000条" style="text-align: center">
             </div>
-            <div class="col-md-4 col-xs-4">
-                <input type="text" id="keyword" placeholder="查询关键字">
+            <div class="col-md-5 col-xs-5">
+                <input type="text" id="keyword" placeholder="查询关键字 支持正则表达式" style="text-align: center">
             </div>
-            <div class="col-md-4 col-xs-4">
+            <div class="col-md-2 col-xs-2">
                 <input type="button" value="提交" id="btnSubmit">
             </div>
         </div>

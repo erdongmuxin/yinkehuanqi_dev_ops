@@ -6,7 +6,7 @@
 {% block script %}
     <script>
         $(function () {
-            $('#up_btn').click(function () {
+            $('.up_btn').click(function () {
                 setTimeout(function () {
                     $('#up').html('正在上传,上传完成之后,页面会刷新,请耐心等待,勿执行其他操作')
                 }, 0)
@@ -45,7 +45,7 @@
                         <input type="hidden" name="yx_info" value="{{ yx_name }}">
                     </div>
                     <div class="col-md-5 col-xs-5">
-                        <input type="submit" value="重新上传{{ yx_name }}文件" id="up_btn">
+                        <input type="submit" value="重新上传{{ yx_name }}文件" class="up_btn">
                     </div>
                 </form>
             </div>

@@ -24,7 +24,7 @@ def connect_to_machine(hostname):
                          r'%s/%s/key-%s.pem' % (settings.MEIDA_ROOT, hostname, hostname)),
             verify=False
         )
-        client = docker.DockerClient(base_url='tcp://' + hostname + ':2376', tls=tls_config, version='auto')
+        client = docker.DockerClient(base_url='tcp://%s:2376' % hostname, tls=tls_config, version='auto')
         return client
     except docker.errors.TLSParameterError:
         return JsonResponse({'data': 0})
@@ -73,17 +73,13 @@ def show_logs(request):
         client = connect_to_machine(host.hostname)
         try:
             container = client.containers.get(container)
-            if int(length):
+
+            if length != '':
                 logs = container.logs(tail=int(length))
             else:
                 logs = container.logs(tail=100)
             logs = logs.replace(b'\n', b'<br>')
             logs = logs.replace(b'\tat', b'&emsp;&emsp;')
-            if keyword:
-                word = re.findall(b'%s' % keyword.encode(), logs, flags=re.IGNORECASE)
-                Sword = set(word)
-                for i in Sword:
-                    logs = re.sub(b'%s' % i, b'<font color=\"red\">%s</font>' % i, logs)
             logs = logs.decode()
             logs_list = logs.split('<br>')
             logs = ''
@@ -92,6 +88,12 @@ def show_logs(request):
                     logs += '%s<br>' % i
             if not logs:
                 logs = '没有查到数据<br>'
+            if keyword:
+                keyword = keyword.replace(' ', '\\s+')
+                word = re.findall(keyword, logs, re.I)
+                Sword = set(word)
+                for i in Sword:
+                    logs = re.sub(i, '<font color=\"red\">%s</font>' % i, logs)
             return JsonResponse({'data': logs})
         except AttributeError:
             return client

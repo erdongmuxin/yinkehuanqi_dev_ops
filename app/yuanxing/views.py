@@ -1,4 +1,5 @@
 import os
+import re
 import shutil
 import zipfile
 
@@ -30,6 +31,8 @@ def add_yx(request):
     yx_name = request.POST.get('add_yx_name')
     if yx_name == '':
         return JsonResponse({'error': 'name must not be null'})
+    if re.search('\W', yx_name):
+        return JsonResponse({'error': 'name must not contains special characters'})
     if YuanXingInfo.objects.filter(name=yx_name):
         return JsonResponse({'error': 'this one is existed'})
     else:
@@ -49,23 +52,26 @@ def edit_yx(request):
     dir_name = os.path.join(path, yx_name)
     upload_file = os.path.join(path, upload.name)
 
-    if upload.name.rstrip('.zip') == yx_name:
+    if upload.name.replace('.zip', '') == yx_name:
         if os.path.exists(dir_name):
             shutil.rmtree(dir_name)
 
         with open(upload_file, 'wb') as f:
             for content in upload.chunks():
                 f.write(content)
+        if request.META.get('HTTP_USER_AGENT').__contains__('Mac'):
+            os.system('unzip %s -d %s' % (upload_file, path))
+        else:
+            f = zipfile.ZipFile(upload_file, 'r')
+            for file in f.namelist():
+                f.extract(file, path)
 
-        f = zipfile.ZipFile(upload_file, 'r')
-        for file in f.namelist():
-            f.extract(file, path)
-            absolute_file_src = os.path.join(path, file)
-            # 中文传输进来之后是一个乱码的状态,zip默认是cp437编码,所以需要先编码成二进制,再解码成gbk
-            absolute_file_des = os.path.join(path, file.encode('cp437').decode('gbk'))
+                absolute_file_src = os.path.join(path, file)
+                # windows的zip文件中文传输进来之后是一个乱码的状态,zip默认是cp437编码,所以需要先编码成二进制,再解码成gbk
+                absolute_file_des = os.path.join(path, file.encode('cp437').decode('gbk'))
 
-            os.rename(absolute_file_src, absolute_file_des)
-        f.close()
+                os.rename(absolute_file_src, absolute_file_des)
+            f.close()
         os.remove(upload_file)
 
         return redirect('yuanxing:index')
