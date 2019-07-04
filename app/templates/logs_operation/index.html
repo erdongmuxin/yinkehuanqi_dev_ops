@@ -18,6 +18,7 @@
                 })
             });
             $('#group').change(function () {
+                window.data = new Date();
                 pid = $(this).val();
                 host = $('#host');
                 container = $('#container');
@@ -54,17 +55,18 @@
                 })
             });
         });
-    </script>
-    <script>
         $(function () {
             $('#btnSubmit').click(function () {
+                clearTimeout(window.timer);
                 $('#infos').show().html('正在查询,请稍后');
                 hostid = $('#host').val();
+                length = $('#length').val();
+                keyword = $('#keyword').val();
                 containername = $('#container').val();
                 $.ajax({
                     'url': '{% url 'lo_op:show_logs' %}',
                     'type': 'post',
-                    'data': {'hostid': hostid, 'container': containername},
+                    'data': {'hostid': hostid, 'container': containername, 'length': length, 'keyword': keyword},
                     'dataType': 'json'
                 }).success(function (data) {
                     if (data.data === 1) {
@@ -74,14 +76,36 @@
                     } else if (data.data === 0) {
                         $('#infos').show().html('该主机目前无法连接')
                     } else {
-                        {% comment %}let content = '';
-                        data.data.forEach(function (line) {
-                            content = content + line + '<br>'
-                        });{% endcomment %}
                         $('#infos').show().html(data.data);
-                        $('#testscorll').get(0).scrollTop = $('#testscorll').get(0).scrollHeight()
+                        $('#testscorll').get(0).scrollTop = $('#testscorll').get(0).scrollHeight
                     }
                 })
+            })
+        });
+        $(function () {
+            $('#btnRefresh').click(function () {
+                hostid = $('#host').val();
+                containername = $('#container').val();
+                $.ajax({
+                    'url': '{% url 'lo_op:show_logs' %}',
+                    'type': 'post',
+                    'data': {'hostid': hostid, 'container': containername,'length': '200', 'keyword': ''},
+                    'dataType': 'json'
+                }).success(function (data) {
+                    if (data.data === 1) {
+                        $('#infos').show().html('请选择主机')
+                    } else if (data.data === 2) {
+                        $('#infos').show().html('请选择容器')
+                    } else if (data.data === 0) {
+                        $('#infos').show().html('该主机目前无法连接')
+                    } else {
+                        $('#infos').show().html(data.data);
+                        $('#testscorll').get(0).scrollTop = $('#testscorll').get(0).scrollHeight
+                    }
+                });
+                window.timer = setTimeout(function () {
+                    $('#btnRefresh').click()
+                }, 5000)
             })
         })
     </script>
@@ -94,36 +118,45 @@
     </style>
 {% endblock %}
 {% block content %}
-    <div class="row">
-        {#        <form action="{% url 'lo_op:show_logs' %}" method="post">#}
-        <div class="select2-container col-md-2 select2-search--dropdown">
+    <div class="row" style="text-align: center">
+        <div class="select2-container col-md-4 col-xs-4 select2-search--dropdown">
             <select name="group" id="group">
                 <option>---请选择环境---</option>
             </select>
         </div>
-        <div class="select2-container col-md-2">
+        <div class="select2-container col-md-4 col-xs-4">
             <select name="host" id="host">
                 <option>---请选择主机---</option>
             </select>
         </div>
-        <div class="select2-container col-md-2">
+        <div class="select2-container col-md-4 col-xs-4">
             <select name="container" id="container">
                 <option value="">---请选择容器---</option>
             </select>
         </div>
-        {#            <div class="select2-container col-md-2">#}
-        {#                <select name="operation" id="operation">#}
-        {#                    <option value="10">---请选择操作---</option>#}
-        {#                </select>#}
-        {#            </div>#}
-        <div class="col-md-2 vLargeTextField">
-            <input type="button" value="提交" id="btnSubmit">
+    </div>
+    <br>
+    <hr>
+    <div class="row" style="text-align: center">
+        <div class="col-md-9 col-xs-9 panel panel-default">
+            <div class="col-md-5 col-xs-5">
+                <input type="text" id="length" placeholder="查询条数 默认1000条" style="text-align: center">
+            </div>
+            <div class="col-md-5 col-xs-5">
+                <input type="text" id="keyword" placeholder="查询关键字 支持正则表达式" style="text-align: center">
+            </div>
+            <div class="col-md-2 col-xs-2">
+                <input type="button" value="提交" id="btnSubmit">
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-3">
+            <input type="button" value="实时刷新" id="btnRefresh">
         </div>
     </div>
     <hr>
     <div class="pre-scrollable"
          style="max-width: 100%; max-height: 600px; height: 1000px; overflow-y: auto; word-break: break-all"
          id="testscorll">
-        <div id="infos"></div>
+        <div id="infos" style="font-size: 16px"></div>
     </div>
 {% endblock %}

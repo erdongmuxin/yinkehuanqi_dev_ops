@@ -53,7 +53,14 @@ class HostInfo(models.Model):
         db_table = 'hosts'
         verbose_name_plural = '主机'
 
-# docker 操作相关的model
-# class DockerLogOperation(models.Model):
-#     operation_name = models.CharField(max_length=50, null=False, unique=True)
-#     operation
+
+# 原型相关的model
+class YuanXingInfo(models.Model):
+    name = models.CharField(max_length=100, null=False, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'yuanxing'
+        verbose_name_plural = '原型'

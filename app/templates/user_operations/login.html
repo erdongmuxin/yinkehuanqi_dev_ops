@@ -7,6 +7,12 @@
 {% block script %}
     <script>
         $(function () {
+            $('#username').focus();
+            $('#password').keydown(function (event) {
+                if (event.which === 13) {
+                    $('#btnLogin').click()
+                }
+            });
             $('#btnLogin').click(function () {
                 username = $('#username').val();
                 password = $('#password').val();
@@ -27,7 +33,7 @@
                     }
                 })
             })
-        })
+        });
     </script>
 {% endblock %}
 

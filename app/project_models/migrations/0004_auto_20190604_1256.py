@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('project_models', '0003_hostinfo_machinegroupinfo'),
     ]

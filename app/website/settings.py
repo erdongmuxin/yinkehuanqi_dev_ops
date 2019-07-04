@@ -22,8 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2t(x%2ew03g_4@-k0$-2t5(sz*o8f9d%r(o%m_p1lx2&8tf43_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user_operations.apps.UserOperationsConfig',
     'midware.apps.MidwareConfig',
-    'project_models.apps.ProjectModelsConfig'
+    'project_models.apps.ProjectModelsConfig',
+    'yuanxing.apps.YuanxingConfig',
 ]
 
 MIDDLEWARE = [
@@ -80,10 +81,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'devops',
         'USER': 'root',
-        'PASSWORD': 'Guiaiy857203',
-        'HOST': 'database1.mysql.rds.aliyuncs.com',
-        # 'PASSWORD': 'Clota_saas_dev@2019Root',
-        # 'HOST': '172.17.12.142',
+        # 'PASSWORD': 'Guiaiy857203',
+        # 'HOST': 'database1.mysql.rds.aliyuncs.com',
+        'PASSWORD': 'Clota_saas_dev@2019Root',
+        'HOST': '172.17.12.142',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"

@@ -1,3 +1,6 @@
+import datetime
+import time
+
 import docker
 import urllib3
 
@@ -12,8 +15,11 @@ tls_config = docker.tls.TLSConfig(
 print(1)
 client = docker.DockerClient(base_url='tcp://zhongnan_backend:2376', tls=tls_config, version='auto')
 
-container = client.containers.list()
+container = client.containers.get('tomcat')
+date = datetime.datetime.now()
 
-
-for i in container:
-    print(i.name)
+while True:
+    print(date)
+    time.sleep(1)
+    logs = container.logs(timestamps=True, since=10)
+    print(logs.decode())

@@ -21,4 +21,6 @@ urlpatterns = [
 
     path('', include('user_operations.urls', namespace='uo_op')),
     path('lo_op/', include('logs_operation.urls', namespace='lo_op')),
+    path('yuanxing/', include('yuanxing.urls', namespace='yuanxing')),
+
 ]
